@@ -38,16 +38,16 @@ def nf_fast_flow(input_dim):
                              {'seed':k},
                              name=F'permute_high_res_{k}'))
         '''
-        if k % 2 == 0 or c.only_3x3_convolution:
-            nodes.append(Ff.Node(nodes[-1],
-                                 Fm.AllInOneBlock,
-                                 {'subnet_constructor':subnet_conv_3, 'affine_clamping':c.clamp},
-                                 name=F'conv_high_res_{k}'))
-        else:
-            nodes.append(Ff.Node(nodes[-1],
-                                 Fm.AllInOneBlock,
-                                 {'subnet_constructor':subnet_conv_1, 'affine_clamping':c.clamp},
-                                 name=F'conv_high_res_{k}'))
+#         if k % 2 == 0 or c.only_3x3_convolution:
+        nodes.append(Ff.Node(nodes[-1],
+                             Fm.AllInOneBlock,
+                             {'subnet_constructor':subnet_conv_3, 'affine_clamping':c.clamp},
+                             name=F'conv_high_res_{k}'))
+#         else:
+#             nodes.append(Ff.Node(nodes[-1],
+#                                  Fm.AllInOneBlock,
+#                                  {'subnet_constructor':subnet_conv_1, 'affine_clamping':c.clamp},
+#                                  name=F'conv_high_res_{k}'))
 
     nodes.append(Ff.OutputNode(nodes[-1], name='output'))
     #print(nodes)
